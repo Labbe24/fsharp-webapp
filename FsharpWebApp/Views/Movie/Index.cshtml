@@ -1,0 +1,29 @@
+﻿@using FsharpWebApp.Models
+@model ActorModelViewModel
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Movies</h1>
+    <p>This page let's add movies</p>
+</div>
+
+<h3>Movies</h3>
+<a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Create">New movie</a>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Release Date</th>
+        <th>Genre</th>
+    </tr>
+    @foreach (var movie in Model.Movies)
+    {
+    <tr>
+        <td>@movie.Title</td>
+        <td>@movie.ReleaseDate</td>
+        <td>@movie.Genre</td>
+    </tr>
+    }
+</table>
+

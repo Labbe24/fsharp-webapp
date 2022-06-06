@@ -1,0 +1,53 @@
+﻿@using FsharpWebApp.Models
+@model MovieViewModel
+@{
+    ViewData["Title"] = "Create movie";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+
+    <div data-role="page" data-theme="a" id="moviesCreatePage">
+
+        <div data-role="content">
+            @using (Html.BeginForm("Create", "Movie", FormMethod.Post))
+            {
+
+
+            <div data-role="fieldcontain">
+                @Html.LabelFor(model => model.Title)
+                @Html.EditorFor(model => model.Title)
+                <div>
+                    @Html.ValidationMessageFor(m => m.Title)
+                </div>
+            </div>
+
+            <div data-role="fieldcontain">
+                @Html.LabelFor(model => model.ReleaseDate)
+                @Html.EditorFor(model => model.ReleaseDate)
+                <div>
+                    @Html.ValidationMessageFor(m => m.ReleaseDate)
+                </div>
+            </div>
+
+            <div data-role="fieldcontain">
+                @Html.LabelFor(model => model.Genre)
+                @Html.EditorFor(model => model.Genre)
+                <div>
+                    @Html.ValidationMessageFor(m => m.Genre)
+                </div>
+            </div>
+            <div>
+                <button type="submit" data-role="button">Create</button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

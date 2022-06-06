@@ -1,0 +1,35 @@
+﻿@using FsharpWebApp.Models
+@model ActorModelViewModel
+@{
+    ViewData["TitleOne"] = "What, Why and How";
+    ViewData["TitleTwo"] = "Sets";
+    ViewData["TitleThree"] = "Maps";
+    ViewData["TitleFour"] = "Sequence";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Immutable data structures</h1>
+</div>
+
+<h1>@ViewData["TitleOne"]</h1>
+<h2>Binary Search Tree</h2>
+
+<h1>@ViewData["TitleTwo"]</h1>
+
+<h1>@ViewData["TitleThree"]</h1>
+
+<h1>@ViewData["TitleFour"]</h1>
+<h2>Lazy</h2>
+<p>Sequences in F# are lazy, and therefore possibly infinite. The following code from microsofts documentation creates an infinite sequence of floating point numbers.</p>
+<p>
+    <code>
+        let seqInfinite =<br />
+        Seq.initInfinite (fun index -><br />
+        let n = float (index + 1)<br />
+        1.0 / (n * n * (if ((index + 1) % 2 = 0) then 1.0 else -1.0)))<br />
+
+        printfn "%A" seqInfinite
+    </code>
+    <br />
+    <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/sequences">Source</a>
+</p>

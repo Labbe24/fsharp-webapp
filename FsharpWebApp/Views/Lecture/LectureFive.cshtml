@@ -1,0 +1,109 @@
+﻿@using FsharpWebApp.Models
+@model ActorModelViewModel
+@{
+    ViewData["TitleOne"] = "Stack";
+    ViewData["TitleTwo"] = "Heap";
+    ViewData["TitleThree"] = "Recursion";
+    ViewData["TitleFour"] = "Optimization";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Stack, Heap and Optimization</h1>
+</div>
+
+<p>Memory in F# is allocated much like in programming languages like C++, C# and Java. Either it is allocated to the Stack or to the Heap.</p>
+
+<h1>@ViewData["TitleOne"]</h1>
+
+<p>
+    Values or objects that are allocated in the same function, declaration or scope, are kept in a stack frame. When a function is called a stack frame is pushed onto the stack.
+    When the function has finished executing, the stack frame related to that function will be popped from the stack and the memory allocated in the scope of the function will be deallocated.
+</p>
+
+<h1>@ViewData["TitleTwo"]</h1>
+
+<h1>@ViewData["TitleThree"]</h1>
+<p>
+    Recursion is technically speaking used to create loops. Every recursive call will push a new stack frame onto the stack.
+    A recursive function will often be implementd with a structure like the example below.
+</p>
+
+<h6>From slides:</h6>
+<p>
+    <code>
+        let rec pow = function<br />
+        | (s: string, 1) -> s<br />
+        | (s: string, n) -> s + pow(s, n-1)
+    </code>
+</p>
+
+<p>
+    A consequence of this is that every recursive instance must wait for the returned result of the recursive call.
+    Thus, the sequence of calls will look like below.
+</p>
+
+<p>
+    -r1 push stack frame<br />
+    --r2 push stack frame<br />
+    ---r3 push stack frame<br />
+    ----r4 push stack frame<br />
+    -----r5 push and pop stack frame<br />
+    ----r4 pop stack frame<br />
+    ---r3 pop stack frame<br />
+    --r2 pop stack frame<br />
+    -r1 pop stack frame
+</p>
+
+<p>
+    All but r5 represent the recursive case where a recursive call takes place - <code>s + pow(s, n-1)</code>.
+    r5 represents the base case. In the code example above this is the match where the <code>string s</code> is returned.
+</p>
+<p>
+    The above figure also makes it obvious that this method of recursion potentially can result in a stack overflow exception because the maximal number of stack frames on the stack is equal to the number of required recursive calls.
+
+</p>
+
+<h2>Tail Recursion</h2>
+<p>Tail recursion is a recursive method where the no recursive instance has to wait for a returned result.</p>
+
+<h6>From slides:</h6>
+<p>
+    <code>
+        let rec = function<br />
+        | (0, m) -> m<br />
+        | (n, m) -> fact(n-1, n*m)
+    </code>
+</p>
+
+<p>This will result in a sequence of calls looking like this.</p>
+
+<p>
+    -r1 push and pop stack frame<br />
+    --r2 push and pop stack frame<br />
+    ---r3 push and pop stack frame<br />
+    ----r4 push and pop stack frame<br />
+    -----r5 push and pop stack frame<br />
+</p>
+
+<p>The above figure shows how tail recursion can not result in a stack overflow exception, as every stack frame will be popped before the next will be pushed(or immediately  after).
+    Resulting in a maximum of one or two stack frames, related to the recursion, on the stack at any given time.
+    Actually the F# compiler wont even pop and push a new stack frame every time a recursive call is being made, it will just reuse the same stack frame.
+    Thus, a more acurate figure is the one below.</p>
+
+<p>
+    -r1 push stack frame<br />
+    --r2<br />
+    ---r3<br />
+    ----r4<br />
+    -----r5 pop stack frame<br />
+</p>
+
+<h3>Accumulator</h3>
+<p>Tail recursivenes can be achievde by passing an accumulator parameter to the recursive call.
+    The accumulator parameter will contain the current state, so that inforamtion does not need to be kept on the stack.
+    </p>
+
+<h3>Continuations</h3>
+<p></p>
+
+<h1>@ViewData["TitleFour"]</h1>

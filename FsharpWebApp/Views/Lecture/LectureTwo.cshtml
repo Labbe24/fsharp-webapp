@@ -1,0 +1,23 @@
+﻿@using FsharpWebApp.Models
+@model ActorModelViewModel
+@{
+    ViewData["TitleOne"] = "Functions";
+    ViewData["TitleTwo"] = "Tuples and Records";
+    ViewData["TitleThree"] = "List";
+    ViewData["TitleFour"] = "Code rules";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Functions, Types and List</h1>
+</div>
+
+<h1>@ViewData["TitleOne"]</h1>
+<p>The F# compiler will try to determine the type by use of type inference. Thus, the developer does not have to explictly declare the type like in typical strongly typed programming languages like C++.</p>
+<p>If the F# compiler cannt infere the type, the compiler will return an error.</p>
+<p>Thourough explanation of type inference in F# and examples of when it can go wrong - <a href="https://fsharpforfunandprofit.com/posts/type-inference/">type inference</a></p>
+
+<h1>@ViewData["TitleTwo"]</h1>
+
+<h1>@ViewData["TitleThree"]</h1>
+
+<h1>@ViewData["TitleFour"]</h1>
