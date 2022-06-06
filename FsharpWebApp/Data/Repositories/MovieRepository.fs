@@ -34,6 +34,7 @@ type MovieRepository(context : DataContext) =
             Async.StartAsTask(query)
 
         member this.CreateMovie movie =
+            // NOT GOOD!
             movie.Id <- (new Random()).Next(99999)
             let query = async {
                 context.Movies.Add(movie) |> ignore
